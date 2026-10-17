@@ -1,0 +1,52 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "pipecat-upliftai-stt"
+version = "1.0.0"
+description = "Uplift AI speech-to-text integration for Pipecat, for Urdu transcription via the Scribe API"
+readme = "README.md"
+license = { file = "LICENSE" }
+requires-python = ">=3.10"
+authors = [{ name = "Uplift AI" }]
+keywords = ["pipecat", "speech-to-text", "stt", "urdu", "uplift-ai", "voice-ai"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: BSD License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Multimedia :: Sound/Audio :: Speech",
+]
+
+# The core section of requirements.txt, plus httpx, which stt.py imports and
+# uses for every request but which was not declared anywhere -- hence the
+# "you need to `pip install httpx`" message in its import guard. With it
+# declared, that instruction is no longer needed.
+#
+# The example-only packages (python-dotenv, daily-python) are deliberately not
+# runtime dependencies: importing the service should not pull a WebRTC stack
+# in with it. They are under the "examples" extra instead.
+dependencies = [
+    "pipecat-ai>=0.0.86",
+    "httpx>=0.27",
+    "aiohttp>=3.8.0",
+    "loguru>=0.7.0",
+    "pydantic>=2.0.0",
+]
+
+[project.optional-dependencies]
+examples = [
+    "python-dotenv>=1.0.0",
+    "daily-python>=0.10.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/havkerboi123/pipecat-upliftai-stt"
+Issues = "https://github.com/havkerboi123/pipecat-upliftai-stt/issues"
+
+[tool.setuptools.packages.find]
+where = ["src"]
